@@ -1,0 +1,23 @@
+﻿<Window x:Class="AglWpfApp.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:local="clr-namespace:AglWpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ContentControl x:Name="PeopleViewModel" cal:Bind.Model="{Binding}"/>
+        </DockPanel>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="RefreshOwners" Width="120" Margin="10" Content="Refresh" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    ToolTip="Click here to refresh the list of pets owners."/>
+        </StackPanel>
+    </Grid>
+</Window>
