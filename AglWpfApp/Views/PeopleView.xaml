@@ -9,22 +9,45 @@
              Background="AliceBlue">
     <UserControl.Resources>
         <Style x:Key="TitleStyle"  TargetType="Label">
-            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="ExtraBold"/>
         </Style>
         <Color x:Key="DarkColour1">#FF464A4E</Color>
         <SolidColorBrush x:Key="DarkColourBrush1"
                      Color="{DynamicResource DarkColour1}" />
+
+        <Style x:Key="EllipseStyle" TargetType="Ellipse">
+            <Setter Property="Height" Value="7"/>
+            <Setter Property="Width" Value="7"/>
+            <Setter Property="Fill" Value="Blue"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Online}" Value="true">
+                    <Setter Property="Fill" Value="Green"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PetListStyle"  TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+        <DataTemplate x:Key="PetListDataTemplate">
+            <DockPanel>
+                <Ellipse Name="ellipse" Margin="5" DockPanel.Dock="Left" Style="{DynamicResource EllipseStyle}"/>
+                <TextBlock Text="{Binding}"></TextBlock>
+            </DockPanel>
+        </DataTemplate>
+
     </UserControl.Resources>
     <Grid>
-        <ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Label Content="Female" Style="{StaticResource TitleStyle}"/>
-                <ListBox Margin="100,10" ItemsSource="{Binding AllFemaleOwnerCats}"/>
-
+                <ListBox Margin="80,10" ItemsSource="{Binding AllFemaleOwnerCats}" Style="{DynamicResource PetListStyle}" ItemTemplate="{DynamicResource PetListDataTemplate}"/>
                 <Label Content="Male" Style="{StaticResource TitleStyle}"/>
-                <ListBox Margin="100,10" ItemsSource="{Binding AllMaleOwnerCats}"/>
+                <ListBox Margin="80,10" ItemsSource="{Binding AllMaleOwnerCats}" Style="{DynamicResource PetListStyle}" ItemTemplate="{DynamicResource PetListDataTemplate}"/>
             </StackPanel>
         </ScrollViewer>
         <Border Grid.Row="0" Grid.Column="0"
